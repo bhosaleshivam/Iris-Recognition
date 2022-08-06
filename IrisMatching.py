@@ -9,6 +9,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn import metrics
+from tqdm import tqdm_notebook as tqdm
+
 
 def dim_reduction(feature_vector_train,feature_vector_test,components):
     '''TRAINING'''
@@ -62,7 +64,7 @@ def IrisMatching(feature_vector_train,feature_vector_test,components,flag):
     min_cosine=[]
     
     #this loop iterates over each test image
-    for i in range(0,len(arr_f)):
+    for i in tqdm(range(0,len(arr_f)),desc="Matching..."):
         L1=[]
         L2=[]
         Cosine=[]

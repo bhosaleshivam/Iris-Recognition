@@ -10,13 +10,15 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn import metrics
+from tqdm import tqdm_notebook as tqdm
+
 
 def IrisLocalization(images):
     #convert image to a color image
     target = [cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in images]
     boundary=[] #initialize empty list that will eventually contain all the images with boundaries
     centers=[] #initialize empty list that will contain the centers of the boundary circles
-    for img in target:
+    for img in tqdm(target,desc="Localizing Iris..."):
         
         draw_img=img
         
@@ -63,13 +65,13 @@ def IrisLocalization(images):
                 k=i
                 
         #draw the inner boundary
-        cv2.circle(draw_img, (k[0], k[1]), k[2], (255, 0, 0), 3)
+        cv2.circle(draw_img, (int(k[0]), int(k[1])), int(k[2]), (255, 0, 0), 3)
 
         pupil=circles[0][0]
         radius_pupil = int(k[2])
         
         #draw the outer boundary, which is approximately found to be at a distance 53 from the inner boundary 
-        cv2.circle(draw_img, (k[0], k[1]), radius_pupil+53, (255, 0, 0), 3)
+        cv2.circle(draw_img, (int(k[0]), int(k[1])), radius_pupil+53, (255, 0, 0), 3)
         boundary.append(draw_img)
         centers.append([k[0],k[1],k[2]])
     return boundary,centers

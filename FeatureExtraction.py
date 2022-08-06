@@ -9,6 +9,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn import metrics
+from tqdm import tqdm_notebook as tqdm
+
 
 
 #modulating function as defined in paper
@@ -69,7 +71,7 @@ def FeatureExtraction(enhanced):
     
     feature_vector=[]
     
-    for i in range(len(enhanced)):
+    for i in tqdm(range(len(enhanced)),desc="Extracting Features..."):
         img=enhanced[i]
         #define a 48x512 region over which the filters are applied
         img_roi=img[:48,:]

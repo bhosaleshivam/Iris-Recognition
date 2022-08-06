@@ -9,12 +9,14 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn import metrics
+from tqdm import tqdm_notebook as tqdm
+
 
 def IrisNormalization(boundary,centers):
     target = [img for img in boundary]
     normalized=[]
     cent=0
-    for img in target:
+    for img in tqdm(target,desc="Normalizing..."):
         #load pupil centers and radius of inner circles
         center_x = centers[cent][0]
         center_y = centers[cent][1]
